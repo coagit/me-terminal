@@ -2,7 +2,7 @@
   import Ps1 from './components/Ps1.svelte';
   import Input from './components/Input.svelte';
   import History from './components/History.svelte';
-  import { theme } from './stores/theme';
+  import {theme} from './stores/theme';
 </script>
 
 <svelte:head>
@@ -17,14 +17,13 @@
 </svelte:head>
 
 <main
-  class="h-full border-2 rounded-md p-4 overflow-auto text-xs sm:text-sm md:text-base"
+  class="h-full overflow-auto rounded-md border-2 p-4 text-xs sm:text-sm md:text-base"
   style={`background-color: ${$theme.background}; color: ${$theme.foreground}; border-color: ${$theme.green};`}
 >
   <History />
 
   <div class="flex flex-col md:flex-row">
     <Ps1 />
-
     <Input />
   </div>
 </main>

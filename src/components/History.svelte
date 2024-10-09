@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { history } from '../stores/history';
-  import { theme } from '../stores/theme';
+  import {history} from '../stores/history';
+  import {theme} from '../stores/theme';
   import Ps1 from './Ps1.svelte';
 </script>
 

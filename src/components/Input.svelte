@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { afterUpdate, onMount } from 'svelte';
-  import { history } from '../stores/history';
-  import { theme } from '../stores/theme';
-  import { commands } from '../utils/commands';
-  import { track } from '../utils/tracking';
+  import {afterUpdate, onMount} from 'svelte';
+  import {history} from '../stores/history';
+  import {theme} from '../stores/theme';
+  import {commands} from '../utils/commands';
+  import {track} from '../utils/tracking';
 
   let command = '';
   let historyIndex = -1;
@@ -19,13 +19,13 @@
       if (command) {
         const output = command();
 
-        $history = [...$history, { command: 'banner', outputs: [output] }];
+        $history = [...$history, {command: 'banner', outputs: [output]}];
       }
     }
   });
 
   afterUpdate(() => {
-    input.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    input.scrollIntoView({behavior: 'smooth', block: 'end'});
   });
 
   const handleKeyDown = async (event: KeyboardEvent) => {
@@ -42,12 +42,12 @@
         const output = await commandFunction(args);
 
         if (commandName !== 'clear') {
-          $history = [...$history, { command, outputs: [output] }];
+          $history = [...$history, {command, outputs: [output]}];
         }
       } else {
         const output = `${commandName}: command not found`;
 
-        $history = [...$history, { command, outputs: [output] }];
+        $history = [...$history, {command, outputs: [output]}];
       }
 
       command = '';
@@ -62,18 +62,13 @@
     } else if (event.key === 'ArrowDown') {
       if (historyIndex > -1) {
         historyIndex--;
-        command =
-          historyIndex >= 0
-            ? $history[$history.length - 1 - historyIndex].command
-            : '';
+        command = historyIndex >= 0 ? $history[$history.length - 1 - historyIndex].command : '';
       }
       event.preventDefault();
     } else if (event.key === 'Tab') {
       event.preventDefault();
 
-      const autoCompleteCommand = Object.keys(commands).find((cmd) =>
-        cmd.startsWith(command),
-      );
+      const autoCompleteCommand = Object.keys(commands).find((cmd) => cmd.startsWith(command));
 
       if (autoCompleteCommand) {
         command = autoCompleteCommand;
@@ -99,7 +94,7 @@
     id="command-input"
     name="command-input"
     aria-label="Command input"
-    class="w-full px-2 bg-transparent outline-none"
+    class="w-full bg-transparent px-2 outline-none"
     type="text"
     style={`color: ${$theme.foreground}`}
     bind:value={command}

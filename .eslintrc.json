@@ -1,0 +1,41 @@
+{
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:eslint-plugin-svelte/recommended"
+  ],
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+    "no-unused-expressions": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {"project": ["./tsconfig.json"]},
+      "plugins": ["@typescript-eslint"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": ["error", {
+          "argsIgnorePattern": "^_",
+          "vars": "all",
+          "args": "after-used",
+          "ignoreRestSiblings": false
+        }],
+        "@typescript-eslint/switch-exhaustiveness-check": "error"
+      }
+    },
+    {
+      "files": ["**/*.svelte", "*.svelte"],
+      "parser": "svelte-eslint-parser",
+      "parserOptions": {
+        "parser": {
+          "ts": "@typescript-eslint/parser",
+          "typescript": "@typescript-eslint/parser"
+        }
+      }
+    }
+  ]
+}
